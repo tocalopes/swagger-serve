@@ -203,7 +203,33 @@ paths:
           description: Requisição não autorizada
         500:
           description: Erro interno no servidor
-    
+  
+    delete:
+      summary: Exclui uma transação
+      description: Excluir uma transação existente na conta do cliente
+      security:
+        - BasicAuth: []
+      operationId: excluiTransacao
+      parameters:
+        - in: path
+          name: codigo
+          type: integer
+          format: int64
+          required: true
+        - in: header
+          name: Authorization
+          type: string
+          required: true
+      responses:
+        204:
+          description: Exclusão realizada com sucesso
+        400:
+          description: Requisição inválida
+        401:
+          description: Requisição não autorizada
+        500:
+          description: Erro interno no servidor
+      
       
 
 definitions:
