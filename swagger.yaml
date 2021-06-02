@@ -18,9 +18,18 @@ info:
     name: Suporte
     url: http://localhost:8086/bytebank-spi/v1/suporte
     email: suporte@bytebankapi.com
-  license:
-    name: MIT
-    url: http://opensource.org/licenses/MIT
+  
+securityDefinitions:
+  BasicAuth:
+    type: basic
+    
+security: 
+  - BasicAuth: []
+
+consumes:
+- application/json
+produces:
+- application/json
 
 
 paths:
@@ -28,10 +37,6 @@ paths:
     post:
       summary: Cadastra Cliente
       description: Cadastra um novo cliente
-      consumes:
-      - application/json
-      produces:
-      - application/json
       operationId: cadastraCliente
       parameters:
         - in: body
@@ -55,10 +60,6 @@ paths:
       summary: Consulta saldo
       description: Consulta o saldo da conta do cliente
       operationId: consultaSaldo
-      consumes:
-        - application/json
-      produces:
-        - application/json
       security:
         - BasicAuth: []
       parameters:
@@ -70,7 +71,7 @@ paths:
         - in: path
           name: numero
           type: integer
-          format: int32
+          format: int64
           required: true
         - in: path
           name: digito
@@ -81,10 +82,13 @@ paths:
           name: Authorization
           type: string
           required: true
-          
       responses:
         200:
           description: Consulta realizada com sucesso
+          schema:
+            type: number
+            format: double
+            
         400:
           description: Requisição inválida
         401:
