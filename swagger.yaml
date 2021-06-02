@@ -164,8 +164,7 @@ paths:
         200:
           description: Consulta realizada com sucesso
           schema:
-            type: number
-            format: double
+            $ref: "#/definitions/Extrato"
         400:
           description: Requisição inválida
         401:
@@ -247,6 +246,15 @@ definitions:
         format: date-time
       conta:
         $ref: '#/definitions/Conta'
+  
+  Extrato:
+    type: object
+    properties:
+      transacoes:
+        type: array
+        items:
+          $ref: '#/definitions/Transacao'
+          
         
         
         
